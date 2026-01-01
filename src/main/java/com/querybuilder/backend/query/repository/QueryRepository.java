@@ -49,4 +49,14 @@ public interface QueryRepository extends JpaRepository<Query, UUID> {
      * Count queries for a user
      */
     long countByUserAndDeletedFalse(User user);
+
+    /**
+     * Find query by slug (for SEO-friendly URLs)
+     */
+    Optional<Query> findBySlugAndDeletedFalse(String slug);
+
+    /**
+     * Check if slug exists
+     */
+    boolean existsBySlug(String slug);
 }

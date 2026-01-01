@@ -20,7 +20,8 @@ import lombok.*;
                 @Index(name = "idx_is_public", columnList = "is_public"),
                 @Index(name = "idx_category", columnList = "category"),
                 @Index(name = "idx_is_template", columnList = "is_template"),
-                @Index(name = "idx_deleted", columnList = "deleted")
+                @Index(name = "idx_deleted", columnList = "deleted"),
+                @Index(name = "idx_slug", columnList = "slug")
         }
 )
 @Getter
@@ -69,4 +70,7 @@ public class Query extends AuditableEntity {
     @Column(name = "version", nullable = false)
     @Builder.Default
     private Integer version = 1;
+
+    @Column(name = "slug", unique = true, length = 255)
+    private String slug;
 }

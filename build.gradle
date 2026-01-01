@@ -30,11 +30,24 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     implementation 'org.springframework.boot:spring-boot-starter-flyway'
+    // https://mvnrepository.com/artifact/org.springframework.ai/spring-ai-starter-model-ollama
+    implementation 'org.springframework.ai:spring-ai-starter-model-ollama:2.0.0-M1'
+    // This provides the ChatClient and ChatClient.Builder logic
+    implementation 'org.springframework.ai:spring-ai-client-chat:2.0.0-M1'
+// https://mvnrepository.com/artifact/org.springframework/spring-aop
+    implementation 'org.springframework:spring-aop:7.0.2'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+    // PostgreSQL Driver
+    runtimeOnly 'org.postgresql:postgresql:42.7.4'
+
+    // SQL Server Driver
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc:12.8.1.jre11'
+
+    // Oracle Driver
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc11:23.5.0.24.07'
     implementation 'org.flywaydb:flyway-mysql'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

@@ -38,7 +38,21 @@ public class QueryFavoriteService {
         List<QueryFavorite> favorites = favoriteRepository.findByUserOrderByCreatedAtDesc(user);
 
         return favorites.stream()
-                .map(fav -> queryService.getQueryById(fav.getQuery().getId(), user))
+                .map(fav -> {
+                    // Access the query directly from the relationship
+                    var query = fav.getQuery();
+
+                    // Manually map to QueryResponse instead of calling the other service
+                    return QueryResponse.builder()
+                            .id(query.getId().toString())
+                            .name(query.getName())
+                            .description(query.getDescription())
+                            .sqlQuery(query.getSqlQuery())
+                            .isFavorite(true)
+                            .createdAt(query.getCreatedAt())
+                            // Add other fields your DTO needs
+                            .build();
+                })
                 .collect(Collectors.toList());
     }
 

@@ -297,15 +297,23 @@ public class QueryExecutionService {
      * Apply LIMIT clause to SQL
      */
     private String applyLimit(String sql, Integer limit) {
-        String upperSql = sql.trim().toUpperCase();
+        if (limit == null) return sql;
 
-        // Check if LIMIT already exists
-        if (upperSql.contains("LIMIT")) {
-            return sql;
+        String trimmedSql = sql.trim();
+
+        // Remove trailing semicolon if it exists
+        if (trimmedSql.endsWith(";")) {
+            trimmedSql = trimmedSql.substring(0, trimmedSql.length() - 1).trim();
         }
 
-        // Add LIMIT at the end
-        return sql.trim() + " LIMIT " + limit;
+        String upperSql = trimmedSql.toUpperCase();
+
+        // Check if LIMIT already exists (consider using regex for better accuracy)
+        if (upperSql.contains("LIMIT")) {
+            return sql; // Return original if limit is already there
+        }
+
+        return trimmedSql + " LIMIT " + limit;
     }
 
     /**
